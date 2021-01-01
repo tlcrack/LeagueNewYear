@@ -14,9 +14,17 @@ public class Countdown {
     
     long elapsedTimeSec = ( millis() - startTimeMs ) / 1000;
     if( elapsedTimeSec > this.startingValueSec ){
-      text("Happy New Year!", width/2 - 550, height/2);
+      fill(255, 0, 0);
+      text("Happy", width/2 - 550, height/2);
+      fill(255, 255, 255);
+      text("New", width/2 - 125, height/2);
+      fill(0, 0, 255);
+      text("Year!", width - 450, height/2);
     } else {
       text(int(this.startingValueSec - elapsedTimeSec), width/2 - 100, height/2);
     }
+  }
+  public long getElapsedTime() {
+    return ( millis() - startTimeMs ) / 1000;
   }
 }

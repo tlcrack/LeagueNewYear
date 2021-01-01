@@ -1,6 +1,6 @@
 public class Firework {
   ArrayList<Particle> particles = new ArrayList<Particle>();
-  int numParticlesPerFirework = 75;
+  int numParticlesPerFirework = 100;
   
   // Add default white firework
   public Firework( float x, float y ) {

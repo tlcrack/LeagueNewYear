@@ -1,40 +1,63 @@
-Countdown countdown;
+Countdown yay2021;
 FireworksDisplay fireworksDisplay;
 Firework firework;
-
+final static int WIDTH = 1200;
+final static int HEIGHT = 800;
 // 1. Declare a PImage variable for the background. Don't initialize it!
-
+PImage NewYorkCity;
+PImage SanDiego;
 void setup() {
   // 2. Set the size of the sketch to at least width=1200 and height=800
-  
+  size(1200, 800);
   // 3. Set your PImage variable to the output of the
   //    loadImage() method with one of the 3 inputs:
   //    "sanDiego.jpg", "futureCity.jpg", "space.jpg"
-  
+  NewYorkCity=loadImage("NewYorkCity.jpg");
+  SanDiego=loadImage("sanDiego.jpg");
   // 4. Call your PImage's resize() method with your width and height
-
+NewYorkCity.resize(WIDTH, HEIGHT);
+SanDiego.resize(WIDTH, HEIGHT);
   
   // 5. Set the firework variable to a new Firework(x, y)
   //    Where x and y are coordinates within the display
+       int[] fireworkColors = {  #00FF00, #0000FF,  #FF00FF, #00FFFF, #00F0FF };
+firework = new Firework(720, 368, fireworkColors);
 
+      fireworksDisplay = new FireworksDisplay();
+     for( int i = 0; i < 60; i++ ){
+       Firework newFirework = new Firework(random(width), random(height), fireworkColors[i % fireworkColors.length]);
+       fireworksDisplay.addFirework(newFirework, i*1000);
+     }
+     for(int k = 0; k < 20; k++){
+       int[] fireworkFinaleColors = { #FF0000, #FFFFFF, #0000FF };
+       Firework newFirework = new Firework(random(width), random(height), fireworkFinaleColors);
+       fireworksDisplay.addFirework(newFirework, (100*k) + 60000);
+     }
+     yay2021 = new Countdown(60);
 }
 
 void draw() {
   // 6. Call the image() method with x = 0 and y = 0 to display your background image
-  
+  if(yay2021.getElapsedTime()<30){
+  image(SanDiego, 0, 0);
+  }
+  else{
+    image(NewYorkCity, 0, 0);
+  }
   // 7. Call tint(255, 50)
-  
+  tint(255, 100);
   // 8. Call the firework's draw() method
-  
+       int[] fireworkColors = {  #00FF00, #0000FF,  #FF00FF, #00FFFF, #00F0FF };
+  firework.draw();
   // 9. Run the program.
   //    Do you see the firework?
   
   // 10. Set the firework variable to a new firework when the mouse is
   //     pressed (mousePressed) and use mouseX and mouseY for the x and y
   //     input parameters
-  
-  
-  
+  if(mousePressed) {
+  firework = new Firework(mouseX, mouseY, fireworkColors);
+  }
   
   // EXTRA
   // Can you figure out how to:
@@ -42,10 +65,8 @@ void draw() {
   // * Make a multi-colored firework?
   // * Set the size of your firework?
   
-  
-  
-  
-  
+  fireworksDisplay.launch();
+  yay2021.draw();
   
   
   
